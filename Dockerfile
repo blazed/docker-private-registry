@@ -13,9 +13,11 @@ run apt-get install -y apache2-utils supervisor python-setuptools nginx redis-se
 
 run rm /etc/rc*.d/*nginx
 
-RUN wget --no-check-certificate https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd_0.7.1_linux_amd64.tar.gz -O confd_0.3.0_linux_amd64.tar.gz 2>/dev/null
-RUN tar -zxf confd_0.7.1_linux_amd64.tar.gz
-RUN mv confd /usr/local/bin/confd
+# Install confd
+ENV CONFD_VERSION 0.7.1
+RUN \
+  curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64 -o /usr/local/bin/confd && \
+  chmod 0755 /usr/local/bin/confd
 
 ADD registry.users.tmpl /etc/confd/templates/
 ADD registry.users.toml /etc/confd/conf.d/
