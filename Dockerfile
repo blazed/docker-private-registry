@@ -1,4 +1,4 @@
-from registry
+from registry:2
 
 env CACHE_REDIS_HOST 127.0.0.1
 env CACHE_REDIS_PORT 6379
@@ -14,7 +14,7 @@ run apt-get install -y apache2-utils supervisor python-setuptools nginx redis-se
 run rm /etc/rc*.d/*nginx
 
 # Install confd
-ENV CONFD_VERSION 0.7.1
+ENV CONFD_VERSION 0.9.0
 RUN \
   curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64 -o /usr/local/bin/confd && \
   chmod 0755 /usr/local/bin/confd
